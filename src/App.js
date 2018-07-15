@@ -9,12 +9,16 @@ class App extends Component {
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.msg }))
+      .then(res => this.setState({ api: res.msg }))
+      .catch(err => console.log(err));
+
+    this.callRules()
+      .then(res => this.setState({ rules: res.msg }))
       .catch(err => console.log(err));
   }
 
   callApi = async () => {
-    const response = await fetch('/api');
+    const response = await fetch('/api/hello');
     const body = await response.json();
 
     console.log('api', body);
@@ -25,6 +29,19 @@ class App extends Component {
     return body;
   };
 
+  callRules = async () => {
+    const response = await fetch('/api/rec');
+    const body = await response.json();
+
+    console.log('rules', body);
+
+    if (response.status !== 200) throw Error(body.message);
+    console.log('response', response);
+
+    return body;
+  };
+
+
   render() {
     return (
       <div className="App">
@@ -32,7 +49,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">{this.state.response}</p>
+        <p className="App-intro">{this.state.api}</p>
+        <p className="App-intro">{this.state.rules}</p>
       </div>
     );
   }
