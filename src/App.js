@@ -13,7 +13,12 @@ class App extends Component {
       .catch(err => console.log(err));
 
     this.callRules()
-      .then(res => this.setState({ rules: res.msg }))
+      .then(res => this.setState({
+        rules: {
+          passing:  res.passing.msg
+          blocking: res.blocking.msg
+        }
+      }))
       .catch(err => console.log(err));
   }
 
@@ -30,7 +35,7 @@ class App extends Component {
   };
 
   callRules = async () => {
-    const response = await fetch('/api/rec');
+    const response = await fetch('/api/rules');
     const body = await response.json();
 
     console.log('rules', body);
@@ -50,7 +55,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to our Site</h1>
         </header>
         <p className="App-intro">{this.state.api}</p>
-        <p className="App-intro">{this.state.rules}</p>
+        <p className="App-intro">{this.state.rules.passing}</p>
+        <p className="App-intro">{this.state.rules.blocked}</p>
       </div>
     );
   }
