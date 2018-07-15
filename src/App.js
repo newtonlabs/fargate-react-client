@@ -4,7 +4,9 @@ import './App.css';
 
 class App extends Component {
   state = {
-    response: ''
+    api: '',
+    passingRules: '',
+    blockingRules: ''
   };
 
   componentDidMount() {
@@ -14,10 +16,8 @@ class App extends Component {
 
     this.callRules()
       .then(res => this.setState({
-        rules: {
-          passing:  res.passing.msg,
-          blocking: res.blocking.msg
-        }
+        passingRules: res.passing.msg,
+        blockingRules: res.blocking.msg
       }))
       .catch(err => console.log(err));
   }
@@ -55,8 +55,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to our Site</h1>
         </header>
         <p className="App-intro">{this.state.api}</p>
-        <p className="App-intro">{this.state.rules.passing}</p>
-        <p className="App-intro">{this.state.rules.blocked}</p>
+        <p className="App-intro"><strong>Passing Rule Test:</strong> {this.state.passingRules}</p>
+        <p className="App-intro"><strong>Blocking Rule Test:</strong> {this.state.blockingRules}</p>
       </div>
     );
   }
