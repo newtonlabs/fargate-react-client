@@ -15,7 +15,7 @@ class App extends Component {
     this.callRules()
       .then(res => this.setState({
         rules: {
-          passing:  res.passing.msg
+          passing:  res.passing.msg,
           blocking: res.blocking.msg
         }
       }))
