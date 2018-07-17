@@ -52,7 +52,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to our Site</h1>
+          <h1 className="App-title">Welcome Adam's Site</h1>
         </header>
         <p className="App-intro"><strong>Node API Test:</strong>{this.state.api}</p>
         <p className="App-intro"><strong>Passing Rule Test:</strong> {this.state.passingRules}</p>
